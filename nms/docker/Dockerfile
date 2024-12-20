@@ -1,5 +1,5 @@
-# Use the Red Hat UBI 8 image as the base image
-FROM registry.access.redhat.com/ubi8:8.10-901
+# Use the CentOS Stream 8 image as the base image
+FROM quay.io/centos/centos:stream8
 
 # Install necessary packages to work with qcow2 images
 RUN dnf install -y qemu-img && \
