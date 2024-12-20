@@ -1,6 +1,6 @@
 # NMS VM
 
-To download a cloud-init image of NMS. 
+From the nms directory, download a cloud-init image of NMS (.qcow2).
 
 Build the container with the following command:
 
@@ -8,7 +8,7 @@ Build the container with the following command:
 make
 ```
 
-The resulting container will be tagged as `vrnetlab/nms:<version>`, e.g. `vrnetlab/nms:7.1.1-20241120-130050-9e7912bb`.
+The resulting container will be tagged as `vrnetlab/nms:<version>`, e.g. `vrnetlab/sevone_nms:7.1.1-20241120-130050-9e7912bb`.
 
 ## Host requirements
 
