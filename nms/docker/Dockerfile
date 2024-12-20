@@ -1,31 +1,12 @@
-FROM debian:bookworm-slim
+# Use the Red Hat UBI 8 image as the base image
+FROM registry.access.redhat.com/ubi8:8.10-901
 
-ARG DEBIAN_FRONTEND=noninteractive
-ARG DISK_SIZE=4G
+# Install necessary packages to work with qcow2 images
+RUN dnf install -y qemu-img && \
+    dnf clean all
 
-RUN apt-get update -qy \
-   && apt-get install -y \
-   bridge-utils \
-   iproute2 \
-   socat \
-   qemu-kvm \
-   tcpdump \
-   ssh \
-   inetutils-ping \
-   dnsutils \
-   iptables \
-   nftables \
-   telnet \
-   cloud-utils \
-   sshpass \
-   && rm -rf /var/lib/apt/lists/*
-
-ARG IMAGE
+# Copy your qcow2 image into the container
 COPY $IMAGE* /
-COPY *.py /
 
-RUN qemu-img resize /${IMAGE} ${DISK_SIZE}
-
-EXPOSE 22 5000 10000-10099
-HEALTHCHECK CMD ["/healthcheck.py"]
-ENTRYPOINT ["/launch.py"]
+# Command to verify the qcow2 image (optional)
+CMD ["qemu-img", "info", "/workspace/your-image.qcow2"]
