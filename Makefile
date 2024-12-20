@@ -3,9 +3,8 @@ NAME=nms
 IMAGE_FORMAT=qcow2
 IMAGE_GLOB=nms-*.qcow2
 
-# match versions like:
-# nms-7.1.1-20241120-130050-9e7912bb.qcow2
-VERSION=$(echo "$IMAGE" | sed -e 's/nms-\(.*\).qcow2/\1/')
+# Extract the version part using sed
+VERSION := $(shell echo $(IMAGE) | sed -e 's/^nms-\([^-]\+\)\.*/\1/')
 
 -include ../makefile-sanity.include
 -include ../makefile.include
